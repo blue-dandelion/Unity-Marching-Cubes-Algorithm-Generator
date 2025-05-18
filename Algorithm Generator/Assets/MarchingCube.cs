@@ -20,29 +20,32 @@ public class MarchingCube : MC_Algorithm
 
     private void Awake()
     {
-        Material pointMat = new(Shader.Find("Standard"));
+        pointMat = new(Shader.Find("Standard"));
         pointMat.color = MC_Color.Yellow_normal;
 
-        // Instantiate 8 Points of the MarchingCube
-        for (int i = 0; i < 8; i++)
+        if(this.transform.childCount < 8)
         {
-            GameObject P = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            DestroyImmediate(P.GetComponent<SphereCollider>());
-            P.name = "Point " + i;
-            P.transform.parent = this.transform;
+            // Instantiate 8 Points of the MarchingCube
+            for (int i = 0; i < 8; i++)
+            {
+                GameObject P = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                DestroyImmediate(P.GetComponent<SphereCollider>());
+                P.name = "Point " + i;
+                P.transform.parent = this.transform;
 
-            if (i == 0) P.transform.localPosition = new Vector3(-0.5f, 0.5f, 0.5f);
-            else if (i == 1) P.transform.localPosition = new Vector3(0.5f, 0.5f, 0.5f);
-            else if (i == 2) P.transform.localPosition = new Vector3(0.5f, 0.5f, -0.5f);
-            else if (i == 3) P.transform.localPosition = new Vector3(-0.5f, 0.5f, -0.5f);
-            else if (i == 4) P.transform.localPosition = new Vector3(-0.5f, -0.5f, 0.5f);
-            else if (i == 5) P.transform.localPosition = new Vector3(0.5f, -0.5f, 0.5f);
-            else if (i == 6) P.transform.localPosition = new Vector3(0.5f, -0.5f, -0.5f);
-            else if (i == 7) P.transform.localPosition = new Vector3(-0.5f, -0.5f, -0.5f);
+                if (i == 0) P.transform.localPosition = new Vector3(-0.5f, 0.5f, 0.5f);
+                else if (i == 1) P.transform.localPosition = new Vector3(0.5f, 0.5f, 0.5f);
+                else if (i == 2) P.transform.localPosition = new Vector3(0.5f, 0.5f, -0.5f);
+                else if (i == 3) P.transform.localPosition = new Vector3(-0.5f, 0.5f, -0.5f);
+                else if (i == 4) P.transform.localPosition = new Vector3(-0.5f, -0.5f, 0.5f);
+                else if (i == 5) P.transform.localPosition = new Vector3(0.5f, -0.5f, 0.5f);
+                else if (i == 6) P.transform.localPosition = new Vector3(0.5f, -0.5f, -0.5f);
+                else if (i == 7) P.transform.localPosition = new Vector3(-0.5f, -0.5f, -0.5f);
 
-            P.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                P.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
-            P.GetComponent<MeshRenderer>().material = pointMat;
+                P.GetComponent<MeshRenderer>().material = pointMat;
+            }
         }
 
         // Get the MarchingCube's 8 Points' GameObjects
